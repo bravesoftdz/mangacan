@@ -6,12 +6,18 @@ inherited Form1_LgXhdpiPh: TForm1_LgXhdpiPh
     Size.Width = 450.000000000000000000
     inherited EdChapter: TEdit
       Size.Width = 290.000000000000000000
+      Size.Height = 32.000000000000000000
     end
     inherited btnnext: TSpeedButton
       Position.X = 400.000000000000000000
+      Size.Height = 48.000000000000000000
     end
     inherited btnPrev: TSpeedButton
       Position.X = 348.000000000000000000
+      Size.Height = 48.000000000000000000
+    end
+    inherited btnRefresh: TSpeedButton
+      Size.Height = 48.000000000000000000
     end
   end
   inherited img1: TImage
