@@ -50,7 +50,7 @@ type
     FLastDistance: Integer;
     FPosisi: Integer;
     FList: TStrings;
-    procedure ParseImage(const AHtml: WideString; AStrings: TStrings);
+    procedure ParseImageList(AStrings: TStrings);
     procedure ShowImage(ANext: Boolean = True);
   public
     { Public declarations }
@@ -83,18 +83,12 @@ begin
 end;
 
 procedure TFrmLengkap.btnRefreshClick(Sender: TObject);
-var
-  LUrl: string;
 begin
   if (EdChapter.Text = EmptyStr) then
     Exit;
 
-  LUrl := Format(sHTML, [EdChapter.Text, StrToInt(EdChapter.Text) + 1,
-    EdChapter.Text]);
-
-  Req.URL := LUrl;
   FList.Clear;
-  ParseImage(Req.Execute().ContentAsString(), FList);
+  ParseImageList(FList);
   FPosisi := -1;
   if (FList.Count = 0) then
   begin
@@ -102,6 +96,51 @@ begin
     Exit;
   end;
   ShowImage;
+end;
+
+procedure TFrmLengkap.ParseImageList(AStrings: TStrings);
+var
+  I: Integer;
+  LUrl: string;
+  LHtml : WideString;
+  LNodes: IHtmlElement;
+  LlistNodes: IHtmlElementList;
+  LElement: IHtmlElement;
+  LUrlGambar: WideString;
+  LFile: TFileName;
+begin
+  FDirectory := Format('%s/OnePiece/%s',[TPath.GetSharedPicturesPath,
+    EdChapter.Text]);
+
+  if not (TDirectory.Exists(FDirectory)) then
+  begin
+    TDirectory.CreateDirectory(FDirectory);
+  end;
+
+  LFile:= TPath.Combine(FDirectory, Format('data-%s.txt', [EdChapter.Text]));
+
+  if TFile.Exists(LFile) then
+  begin
+    AStrings.LoadFromFile(LFile);
+    Exit;
+  end;
+
+  LUrl := Format(sHTML, [EdChapter.Text, StrToInt(EdChapter.Text) + 1,
+    EdChapter.Text]);
+
+  Req.URL := LUrl;
+  LHtml := Req.Execute().ContentAsString();
+
+  LNodes := ParserHTML(LHtml);
+  LlistNodes := LNodes.SimpleCSSSelector('div[id="manga"] img');
+  for I := 0 to LlistNodes.Count - 1 do
+  begin
+    LElement := LlistNodes.Items[I];
+    LUrlGambar := LElement.Attributes['src'];
+    AStrings.Add(LUrlGambar);
+  end;
+  if (AStrings.Count > 0) then
+    AStrings.SaveToFile(LFile);
 end;
 
 procedure TFrmLengkap.EdChapterChange(Sender: TObject);
@@ -147,43 +186,6 @@ begin
     end;
   end;
 
-end;
-
-procedure TFrmLengkap.ParseImage(const AHtml: WideString; AStrings: TStrings);
-var
-  I: Integer;
-  LNodes: IHtmlElement;
-  LlistNodes: IHtmlElementList;
-  LElement: IHtmlElement;
-  LUrlGambar: WideString;
-  LFile: TFileName;
-begin
-  FDirectory := Format('%s/OnePiece/%s',[TPath.GetSharedPicturesPath,
-    EdChapter.Text]);
-
-  if not (TDirectory.Exists(FDirectory)) then
-  begin
-    TDirectory.CreateDirectory(FDirectory);
-  end;
-
-  LFile:= TPath.Combine(FDirectory, Format('data-%s.txt', [EdChapter.Text]));
-
-  if TFile.Exists(LFile) then
-  begin
-    AStrings.LoadFromFile(LFile);
-    Exit;
-  end;
-
-  LNodes := ParserHTML(AHtml);
-  LlistNodes := LNodes.SimpleCSSSelector('div[id="manga"] img');
-  for I := 0 to LlistNodes.Count - 1 do
-  begin
-    LElement := LlistNodes.Items[I];
-    LUrlGambar := LElement.Attributes['src'];
-    AStrings.Add(LUrlGambar);
-  end;
-  if (AStrings.Count > 0) then
-    AStrings.SaveToFile(LFile);
 end;
 
 procedure TFrmLengkap.ShowImage(ANext: Boolean);
