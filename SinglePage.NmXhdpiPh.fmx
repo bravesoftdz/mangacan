@@ -7,6 +7,10 @@ inherited FrmSingle_NmXhdpiPh: TFrmSingle_NmXhdpiPh
     inherited LblJudul: TLabel
       Size.Width = 312.000000000000000000
     end
+    inherited EdChapter: TEdit
+      Position.Y = 8.000000000000000000
+      Size.Height = 32.000000000000000000
+    end
   end
   inherited Browser: TWebBrowser
     Size.Width = 400.000000000000000000
