@@ -317,15 +317,7 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="GambarLengkap.pas">
-            <Form>FrmLengkap</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
         <DCCReference Include="HtmlParser.pas"/>
-        <DCCReference Include="DaftarJudul.pas">
-            <Form>FrmDaftar</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
         <DCCReference Include="SinglePage.pas">
             <Form>FrmSingle</Form>
             <FormType>fmx</FormType>
