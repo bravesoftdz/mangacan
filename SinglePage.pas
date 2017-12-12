@@ -59,7 +59,7 @@ begin
   LFileHtml := ParseImageList(Chapter);
   if (LFileHtml.IsEmpty) then
   begin
-    ShowMessage(Format('komik One Piece Chapter %s Belum Rilis', [EdChapter.Text]));
+    ShowMessage(Format('Komik One Piece Chapter %s Tidak ditemukan', [Chapter]));
     Exit;
   end;
   Browser.Navigate('file://' + LFileHtml);
@@ -101,6 +101,9 @@ begin
 
   LNodes := ParserHTML(LHtml);
   LlistNodes := LNodes.SimpleCSSSelector('div[id="manga"] img');
+  if (LListNodes.Count = 0) then
+    exit;
+
   for I := 0 to LlistNodes.Count - 1 do
   begin
     LElement := LlistNodes.Items[I];
