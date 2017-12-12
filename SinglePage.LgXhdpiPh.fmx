@@ -1,0 +1,15 @@
+inherited FrmSingle_LgXhdpiPh: TFrmSingle_LgXhdpiPh
+  ClientHeight = 695
+  ClientWidth = 450
+  DesignerMasterStyle = 0
+  inherited ToolBar1: TToolBar
+    Size.Width = 450.000000000000000000
+    inherited LblJudul: TLabel
+      Size.Width = 362.000000000000000000
+    end
+  end
+  inherited Browser: TWebBrowser
+    Size.Width = 450.000000000000000000
+    Size.Height = 647.000000000000000000
+  end
+end
