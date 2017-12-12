@@ -31,12 +31,12 @@ type
     tlb1: TToolBar;
     EdChapter: TEdit;
     img1: TImage;
-    il1: TImageList;
     SbInfo: TStatusBar;
     LblInfo: TLabel;
     btnnext: TSpeedButton;
     btnPrev: TSpeedButton;
     btnRefresh: TSpeedButton;
+    Indicator: TAniIndicator;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure BtnNextClick(Sender: TObject);

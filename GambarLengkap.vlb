@@ -8,7 +8,7 @@ Coordinates=88,56,42,33
 Coordinates=161,10,40,33
 
 []
-Coordinates=10,10,55,51
+Coordinates=84,1,40,33
 Visible=True
 
 [EdChapter]
@@ -16,9 +16,6 @@ Coordinates=84,80,66,51
 
 [img1]
 Coordinates=188,62,40,51
-
-[il1]
-Coordinates=84,1,40,33
 
 [SbInfo]
 Coordinates=139,169,46,33
