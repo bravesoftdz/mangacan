@@ -387,6 +387,10 @@
             <Form>FrmSingle</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="TitlePage.pas">
+            <Form>FrmTitle</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

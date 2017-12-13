@@ -1,0 +1,25 @@
+object FrmTitle: TFrmTitle
+  Left = 0
+  Top = 0
+  Caption = 'Komik One Piece'
+  ClientHeight = 480
+  ClientWidth = 273
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object LvTitle: TListView
+    ItemAppearanceClassName = 'TListItemAppearance'
+    ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Align = Client
+    Size.Width = 273.000000000000000000
+    Size.Height = 480.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    OnPullRefresh = LvTitlePullRefresh
+    SearchVisible = True
+    PullToRefresh = True
+  end
+end
