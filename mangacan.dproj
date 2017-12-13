@@ -82,6 +82,30 @@
         <Cfg_2>true</Cfg_2>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSDevice32' and '$(Cfg_2)'=='true') or '$(Cfg_2_iOSDevice32)'!=''">
+        <Cfg_2_iOSDevice32>true</Cfg_2_iOSDevice32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSDevice64' and '$(Cfg_2)'=='true') or '$(Cfg_2_iOSDevice64)'!=''">
+        <Cfg_2_iOSDevice64>true</Cfg_2_iOSDevice64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSSimulator' and '$(Cfg_2)'=='true') or '$(Cfg_2_iOSSimulator)'!=''">
+        <Cfg_2_iOSSimulator>true</Cfg_2_iOSSimulator>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Cfg_2)'=='true') or '$(Cfg_2_OSX32)'!=''">
+        <Cfg_2_OSX32>true</Cfg_2_OSX32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
         <Cfg_2_Win32>true</Cfg_2_Win32>
         <CfgParent>Cfg_2</CfgParent>
@@ -264,7 +288,7 @@
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;dxmdsRS24;dxSkinBlueprintRS24;DBXInterBaseDriver;dxPSDBTeeChartRS24;vclactnband;dxSpreadSheetRS24;vclFireDAC;tethering;svnui;dxSkinVisualStudio2013BlueRS24;FireDACADSDriver;dxFireDACServerModeRS24;dxSkinMetropolisRS24;dxSkinMoneyTwinsRS24;dxSkinOffice2007BlackRS24;dxPSTeeChartRS24;dxPScxPCProdRS24;vcltouch;vcldb;bindcompfmx;svn;dxSkinXmas2008BlueRS24;Intraweb;inetdb;dxSkinOffice2016ColorfulRS24;dxSkinOffice2010BlackRS24;RaizeComponentsVcl;dxADOServerModeRS24;FmxTeeUI;dacfmx240;dxGDIPlusRS24;FireDACIBDriver;fmx;fmxdae;dxSkinSpringTimeRS24;frx24;vclib;dxSkinLondonLiquidSkyRS24;dxSkinLilianRS24;dxSkinValentineRS24;dxSkinWhiteprintRS24;crcontrols240;AbbreviaVCLD;RaizeComponentsVclDb;dbexpress;IndyCore;dxSkiniMaginaryRS24;vclx;dxSkinOffice2016DarkRS24;dsnap;dxSkinOffice2007PinkRS24;dxPSdxSpreadSheetLnkRS24;cxDataRS24;FireDACCommon;dxSkinDevExpressDarkStyleRS24;RESTBackendComponents;VCLRESTComponents;dxSkinDevExpressStyleRS24;soapserver;dxSkinOffice2013LightGrayRS24;cxExportRS24;mydacvcl240;dxOfficeCoreRS24;dac240;dxSkinVisualStudio2013LightRS24;vclie;dxSkinMetropolisDarkRS24;bindengine;DBXMySQLDriver;CloudService;FireDACMySQLDriver;dxPScxCommonRS24;FireDACCommonODBC;FireDACCommonDriver;dxSkinBlackRS24;dxSkinSharpRS24;inet;dxPSLnksRS24;bindcompdbx;IndyIPCommon;dxSkinCoffeeRS24;dxSkinVS2010RS24;vcl;IndyIPServer;dxSkinSharpPlusRS24;dxCoreRS24;IndySystem;dxThemeRS24;acntDX10Berlin_R;dxSkinOffice2013DarkGrayRS24;dsnapcon;dxSkinOffice2007GreenRS24;FireDACMSAccDriver;fmxFireDAC;vclimg;TeeDB;FireDAC;dxPScxGridLnkRS24;dxSkinDarkSideRS24;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;dxSkinOffice2010BlueRS24;dxSkinOffice2013WhiteRS24;dxPSdxLCLnkRS24;FMXTee;dxServerModeRS24;dxPScxExtCommonRS24;soaprtl;DbxCommonDriver;mydac240;ibxpress;Tee;dacvcl240;xmlrtl;soapmidas;ibxbindings;fmxobj;vclwinx;dxSkinMcSkinRS24;rtl;dxLayoutControlRS24;DbxClientDriver;dxSkinOffice2007BlueRS24;dxPSCoreRS24;frxTee24;CustomIPTransport;vcldsnap;dxSkinBlueRS24;dxSkinGlassOceansRS24;cxLibraryRS24;dxSkinStardustRS24;dxSkinSummer2008RS24;dxSkinCaramelRS24;bindcomp;appanalytics;dxSkinsCoreRS24;dxDBXServerModeRS24;dxSkinDarkRoomRS24;dxSkinFoggyRS24;IndyIPClient;dxSkinHighContrastRS24;dxSkinOffice2010SilverRS24;bindcompvcl;cxGridRS24;dxSkinTheAsphaltWorldRS24;TeeUI;frxe24;cxPageControlRS24;cxEditorsRS24;dxSkinSevenClassicRS24;dbxcds;VclSmp;EntityDac;adortl;dxSkinSilverRS24;mydacfmx240;dxSkinVisualStudio2013DarkRS24;dxComnRS24;dxSkinPumpkinRS24;mysqlmon240;dxSkinscxPCPainterRS24;frxDB24;dxSpreadSheetReportDesignerRS24;dsnapxml;dbrtl;inetdbxpress;IndyProtocols;dxSkinOffice2007SilverRS24;dxSkinSevenRS24;dxSkinLiquidSkyRS24;dxHttpIndyRequestRS24;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;dxmdsRS24;DBXInterBaseDriver;dxPSDBTeeChartRS24;vclactnband;dxSpreadSheetRS24;vclFireDAC;tethering;svnui;FireDACADSDriver;dxFireDACServerModeRS24;dxPSTeeChartRS24;dxPScxPCProdRS24;vcltouch;vcldb;bindcompfmx;svn;Intraweb;inetdb;RaizeComponentsVcl;dxADOServerModeRS24;FmxTeeUI;dacfmx240;dxGDIPlusRS24;FireDACIBDriver;fmx;fmxdae;frx24;vclib;crcontrols240;AbbreviaVCLD;RaizeComponentsVclDb;dbexpress;IndyCore;vclx;dsnap;dxPSdxSpreadSheetLnkRS24;cxDataRS24;FireDACCommon;RESTBackendComponents;VCLRESTComponents;soapserver;cxExportRS24;mydacvcl240;dxOfficeCoreRS24;dac240;vclie;bindengine;DBXMySQLDriver;CloudService;FireDACMySQLDriver;dxPScxCommonRS24;FireDACCommonODBC;FireDACCommonDriver;inet;dxPSLnksRS24;bindcompdbx;IndyIPCommon;vcl;IndyIPServer;dxCoreRS24;IndySystem;dxThemeRS24;acntDX10Berlin_R;dsnapcon;FireDACMSAccDriver;fmxFireDAC;vclimg;TeeDB;FireDAC;dxPScxGridLnkRS24;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;dxPSdxLCLnkRS24;FMXTee;dxServerModeRS24;dxPScxExtCommonRS24;soaprtl;DbxCommonDriver;mydac240;ibxpress;Tee;dacvcl240;xmlrtl;soapmidas;ibxbindings;fmxobj;vclwinx;rtl;dxLayoutControlRS24;DbxClientDriver;dxPSCoreRS24;frxTee24;CustomIPTransport;vcldsnap;cxLibraryRS24;bindcomp;appanalytics;dxDBXServerModeRS24;IndyIPClient;bindcompvcl;cxGridRS24;TeeUI;frxe24;cxPageControlRS24;cxEditorsRS24;dbxcds;VclSmp;EntityDac;adortl;mydacfmx240;dxComnRS24;mysqlmon240;frxDB24;dxSpreadSheetReportDesignerRS24;dsnapxml;dbrtl;inetdbxpress;IndyProtocols;dxHttpIndyRequestRS24;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -276,7 +300,7 @@
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;dxmdsRS24;dxSkinBlueprintRS24;DBXInterBaseDriver;dxPSDBTeeChartRS24;vclactnband;dxSpreadSheetRS24;vclFireDAC;tethering;dxSkinVisualStudio2013BlueRS24;FireDACADSDriver;dxFireDACServerModeRS24;dxSkinMetropolisRS24;dxSkinMoneyTwinsRS24;dxSkinOffice2007BlackRS24;dxPSTeeChartRS24;dxPScxPCProdRS24;vcltouch;vcldb;bindcompfmx;dxSkinXmas2008BlueRS24;Intraweb;inetdb;dxSkinOffice2016ColorfulRS24;dxSkinOffice2010BlackRS24;RaizeComponentsVcl;dxADOServerModeRS24;FmxTeeUI;dxGDIPlusRS24;FireDACIBDriver;fmx;fmxdae;dxSkinSpringTimeRS24;vclib;dxSkinLondonLiquidSkyRS24;dxSkinLilianRS24;dxSkinValentineRS24;dxSkinWhiteprintRS24;AbbreviaVCLD;RaizeComponentsVclDb;dbexpress;IndyCore;dxSkiniMaginaryRS24;vclx;dxSkinOffice2016DarkRS24;dsnap;dxSkinOffice2007PinkRS24;dxPSdxSpreadSheetLnkRS24;cxDataRS24;FireDACCommon;dxSkinDevExpressDarkStyleRS24;RESTBackendComponents;VCLRESTComponents;dxSkinDevExpressStyleRS24;soapserver;dxSkinOffice2013LightGrayRS24;cxExportRS24;dxOfficeCoreRS24;dxSkinVisualStudio2013LightRS24;vclie;dxSkinMetropolisDarkRS24;bindengine;DBXMySQLDriver;CloudService;FireDACMySQLDriver;dxPScxCommonRS24;FireDACCommonODBC;FireDACCommonDriver;dxSkinBlackRS24;dxSkinSharpRS24;inet;dxPSLnksRS24;bindcompdbx;IndyIPCommon;dxSkinCoffeeRS24;dxSkinVS2010RS24;vcl;IndyIPServer;dxSkinSharpPlusRS24;dxCoreRS24;IndySystem;dxThemeRS24;dxSkinOffice2013DarkGrayRS24;dsnapcon;dxSkinOffice2007GreenRS24;FireDACMSAccDriver;fmxFireDAC;vclimg;TeeDB;FireDAC;dxPScxGridLnkRS24;dxSkinDarkSideRS24;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;dxSkinOffice2010BlueRS24;dxSkinOffice2013WhiteRS24;dxPSdxLCLnkRS24;FMXTee;dxServerModeRS24;dxPScxExtCommonRS24;soaprtl;DbxCommonDriver;ibxpress;Tee;xmlrtl;soapmidas;ibxbindings;fmxobj;vclwinx;dxSkinMcSkinRS24;rtl;dxLayoutControlRS24;DbxClientDriver;dxSkinOffice2007BlueRS24;dxPSCoreRS24;CustomIPTransport;vcldsnap;dxSkinBlueRS24;dxSkinGlassOceansRS24;cxLibraryRS24;dxSkinStardustRS24;dxSkinSummer2008RS24;dxSkinCaramelRS24;bindcomp;appanalytics;dxSkinsCoreRS24;dxDBXServerModeRS24;dxSkinDarkRoomRS24;dxSkinFoggyRS24;IndyIPClient;dxSkinHighContrastRS24;dxSkinOffice2010SilverRS24;bindcompvcl;cxGridRS24;dxSkinTheAsphaltWorldRS24;TeeUI;cxPageControlRS24;cxEditorsRS24;dxSkinSevenClassicRS24;dbxcds;VclSmp;adortl;dxSkinSilverRS24;dxSkinVisualStudio2013DarkRS24;dxComnRS24;dxSkinPumpkinRS24;dxSkinscxPCPainterRS24;dxSpreadSheetReportDesignerRS24;dsnapxml;dbrtl;inetdbxpress;IndyProtocols;dxSkinOffice2007SilverRS24;dxSkinSevenRS24;dxSkinLiquidSkyRS24;dxHttpIndyRequestRS24;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;dxmdsRS24;DBXInterBaseDriver;dxPSDBTeeChartRS24;vclactnband;dxSpreadSheetRS24;vclFireDAC;tethering;FireDACADSDriver;dxFireDACServerModeRS24;dxPSTeeChartRS24;dxPScxPCProdRS24;vcltouch;vcldb;bindcompfmx;Intraweb;inetdb;RaizeComponentsVcl;dxADOServerModeRS24;FmxTeeUI;dxGDIPlusRS24;FireDACIBDriver;fmx;fmxdae;vclib;AbbreviaVCLD;RaizeComponentsVclDb;dbexpress;IndyCore;vclx;dsnap;dxPSdxSpreadSheetLnkRS24;cxDataRS24;FireDACCommon;RESTBackendComponents;VCLRESTComponents;soapserver;cxExportRS24;dxOfficeCoreRS24;vclie;bindengine;DBXMySQLDriver;CloudService;FireDACMySQLDriver;dxPScxCommonRS24;FireDACCommonODBC;FireDACCommonDriver;inet;dxPSLnksRS24;bindcompdbx;IndyIPCommon;vcl;IndyIPServer;dxCoreRS24;IndySystem;dxThemeRS24;dsnapcon;FireDACMSAccDriver;fmxFireDAC;vclimg;TeeDB;FireDAC;dxPScxGridLnkRS24;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;dxPSdxLCLnkRS24;FMXTee;dxServerModeRS24;dxPScxExtCommonRS24;soaprtl;DbxCommonDriver;ibxpress;Tee;xmlrtl;soapmidas;ibxbindings;fmxobj;vclwinx;rtl;dxLayoutControlRS24;DbxClientDriver;dxPSCoreRS24;CustomIPTransport;vcldsnap;cxLibraryRS24;bindcomp;appanalytics;dxDBXServerModeRS24;IndyIPClient;bindcompvcl;cxGridRS24;TeeUI;cxPageControlRS24;cxEditorsRS24;dbxcds;VclSmp;adortl;dxComnRS24;dxSpreadSheetReportDesignerRS24;dsnapxml;dbrtl;inetdbxpress;IndyProtocols;dxHttpIndyRequestRS24;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.cbsanjaya.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -305,6 +329,9 @@
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppEnableHighDPI>true</AppEnableHighDPI>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Icon_MainIcon>img\luffy.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -314,14 +341,42 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Android)'!=''">
         <VerInfo_Build>1</VerInfo_Build>
+        <IncludeAndroid_Splash>False</IncludeAndroid_Splash>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_iOSDevice32)'!=''">
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
+        <VerInfo_BundleId>$(MSBuildProjectName)</VerInfo_BundleId>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_iOSDevice64)'!=''">
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
+        <VerInfo_BundleId>$(MSBuildProjectName)</VerInfo_BundleId>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_iOSSimulator)'!=''">
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_OSX32)'!=''">
+        <Debugger_Launcher>/usr/X11/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <Manifest_File>(None)</Manifest_File>
+        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppEnableHighDPI>true</AppEnableHighDPI>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Icon_MainIcon>img\luffy.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppEnableHighDPI>true</AppEnableHighDPI>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Icon_MainIcon>img\luffy.ico</Icon_MainIcon>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -361,19 +416,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Release\styles.xml" Configuration="Release" Class="AndroidSplashStyles">
-                    <Platform Name="Android">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="img\icon72.png" Configuration="Release" Class="Android_LauncherIcon72">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Android\Release\splash_image_def.xml" Configuration="Release" Class="AndroidSplashImageDef">
-                    <Platform Name="Android">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -410,6 +455,13 @@
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Configuration="Debug" Class="Android_SplashImage426">
                     <Platform Name="Android">
                         <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="c:\program files\embarcadero\studio\19.0\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png" Configuration="Release" Class="UWP_DelphiLogo44">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -524,6 +576,13 @@
                 <DeployFile LocalName="$(BDS)\lib\android\debug\mips\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeMipsFile">
                     <Platform Name="Android">
                         <RemoteName>libmangacan.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="c:\program files\embarcadero\studio\19.0\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png" Configuration="Release" Class="UWP_DelphiLogo150">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo150x150.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
