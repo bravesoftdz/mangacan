@@ -6,6 +6,9 @@ interface
 {$DEFINE MOBILE_DEV}
 {$ENDIF}
 
+uses
+  System.SysUtils, System.Generics.Collections;
+
 const
   LowStrIndex = Low(string);
 
@@ -68,9 +71,6 @@ type
 function ParserHTML(const Source: WideString): IHtmlElement; stdcall;
 
 implementation
-
-uses
-  SysUtils, generics.Collections;
 
 type
   TStringDictionary = TDictionary<string, string>;
@@ -351,7 +351,6 @@ end;
 function _aoBeginWord(const Item: TAttrSelectorItem; E: THtmlElement): Boolean;
 var
   S: TStringDynArray;
-  I: Integer;
 begin
   Result := false;
   if not E.FAttributes.ContainsKey(Item.Key) then
@@ -499,7 +498,6 @@ end;
 function CreateTagElement(AOwner: THtmlElement; AText: string;
   ALine, ACol: Integer): THtmlElement;
 var
-  Strs: TStringDynArray;
   I: Integer;
   Attrs: TAttributeDynArray;
 begin
@@ -632,7 +630,6 @@ var
     PreIsblique: Boolean;
   begin
     oldIndex := sc.CodeIndex;
-    stringChar := #0;
     sc.SkipBlank();
     if sc.subStr(4) = '<!--' then
     begin
@@ -734,7 +731,6 @@ begin
   sc.setCode(Source);
   while sc.CodeIndex <= high(sc.Code) do
   begin
-    ElementType := EtUnknow;
     OldCodeIndex := sc.CodeIndex;
     BeginLineNum := sc.LineNum;
     BeginColNum := sc.ColNum;
@@ -916,7 +912,6 @@ var
   E: THtmlElement;
   T: THtmlElement;
   FoundIndex: Integer;
-  TagProperty: WORD;
 begin
   Result := THtmlElement.Create(nil, '', 0, 0);
   Result.FTagName := '#DOCUMENT';
@@ -927,7 +922,6 @@ begin
   while I < ElementList.Count do
   begin
     E := ElementList[I] as THtmlElement;
-    TagProperty := GetTagProperty(E.FTagName);
 
     // 空节点,往下找,如果下一个带Tag的节点不是它的关闭节点,那么自动关闭
     FoundIndex := -1;
@@ -1318,7 +1312,7 @@ var
 
 function GetTagProperty(const TagName: string): WORD;
 var
-  Key, S: string;
+  Key: string;
 begin
   Result := 0;
   Key := UpperCase(TagName);
@@ -1437,7 +1431,6 @@ var
 
   procedure ParserItem(var Item: TCSSSelectorItem);
   var
-    tmp: string;
     pAttr: PAttrSelectorItem;
   begin
     sc.SkipBlank();
@@ -1513,7 +1506,6 @@ var
   end;
 
 var
-  Tag: string;
   pitems: PCSSSelectorItems;
   pItem: PCSSSelectorItem;
 begin
