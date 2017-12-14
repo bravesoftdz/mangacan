@@ -7,12 +7,14 @@ object FrmSingle: TFrmSingle
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnClose = FormClose
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object ToolBar1: TToolBar
     Size.Width = 303.000000000000000000
     Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 1
+    TabOrder = 0
     object LblJudul: TLabel
       Align = Client
       Size.Width = 255.000000000000000000
@@ -23,12 +25,12 @@ object FrmSingle: TFrmSingle
     end
     object BtnBack: TButton
       Align = MostLeft
-      ModalResult = 8
       Size.Width = 48.000000000000000000
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'priortoolbutton'
       TabOrder = 2
+      OnClick = BtnBackClick
     end
   end
   object Browser: TWebBrowser
@@ -36,24 +38,5 @@ object FrmSingle: TFrmSingle
     Size.Width = 303.000000000000000000
     Size.Height = 423.000000000000000000
     Size.PlatformDefault = False
-  end
-  object Client: TNetHTTPClient
-    Asynchronous = False
-    ConnectionTimeout = 60000
-    ResponseTimeout = 60000
-    AllowCookies = True
-    HandleRedirects = True
-    UserAgent = 'Embarcadero URI Client/1.0'
-    Left = 80
-    Top = 80
-  end
-  object Req: TNetHTTPRequest
-    Asynchronous = False
-    ConnectionTimeout = 60000
-    ResponseTimeout = 60000
-    MethodString = 'GET'
-    Client = Client
-    Left = 24
-    Top = 80
   end
 end
