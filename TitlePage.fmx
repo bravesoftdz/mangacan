@@ -20,7 +20,6 @@ object FrmTitle: TFrmTitle
     Size.Height = 432.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
-    ItemAppearanceObjects.ItemObjects.Detail.WordWrap = True
     ItemAppearanceObjects.ItemObjects.Image.Visible = False
     OnItemClick = LvTitleItemClick
     OnPullRefresh = LvTitlePullRefresh
