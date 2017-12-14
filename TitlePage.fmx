@@ -7,19 +7,57 @@ object FrmTitle: TFrmTitle
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object LvTitle: TListView
-    ItemAppearanceClassName = 'TListItemAppearance'
-    ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+    ItemAppearanceClassName = 'TImageListItemBottomDetailAppearance'
+    ItemEditAppearanceClassName = 'TImageListItemBottomDetailShowCheckAppearance'
     HeaderAppearanceClassName = 'TListHeaderObjects'
     FooterAppearanceClassName = 'TListHeaderObjects'
     Align = Client
     Size.Width = 273.000000000000000000
-    Size.Height = 480.000000000000000000
+    Size.Height = 432.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
+    ItemAppearanceObjects.ItemObjects.Detail.WordWrap = True
+    ItemAppearanceObjects.ItemObjects.Image.Visible = False
+    OnItemClick = LvTitleItemClick
     OnPullRefresh = LvTitlePullRefresh
     SearchVisible = True
     PullToRefresh = True
+  end
+  object ToolBar1: TToolBar
+    Align = MostTop
+    Size.Width = 273.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object BtnRefresh: TButton
+      Align = MostRight
+      Position.X = 225.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'refreshtoolbutton'
+      TabOrder = 0
+      OnClick = BtnRefreshClick
+    end
+    object Label1: TLabel
+      Align = Client
+      StyledSettings = [Family, Size, FontColor]
+      Margins.Left = 8.000000000000000000
+      Size.Width = 217.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'Komik One Piece'
+      TabOrder = 1
+    end
+  end
+  object Indicator: TAniIndicator
+    Align = Center
+    Enabled = True
+    Visible = False
   end
 end

@@ -1,0 +1,19 @@
+inherited FrmTitle_LgXhdpiPh: TFrmTitle_LgXhdpiPh
+  ClientHeight = 695
+  ClientWidth = 450
+  DesignerMasterStyle = 0
+  inherited LvTitle: TListView
+    Size.Width = 450.000000000000000000
+    Size.Height = 647.000000000000000000
+  end
+  inherited ToolBar1: TToolBar
+    Size.Width = 450.000000000000000000
+    inherited BtnRefresh: TButton
+      Position.X = 402.000000000000000000
+    end
+    inherited Label1: TLabel
+      Size.Width = 394.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+  end
+end
