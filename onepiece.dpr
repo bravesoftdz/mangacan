@@ -1,4 +1,4 @@
-program mangacan;
+program onepiece;
 
 uses
   System.StartUpCopy,
