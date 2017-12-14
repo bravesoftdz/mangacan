@@ -45,7 +45,8 @@ type
     FTitle: string;
     procedure Refresh;
   public
-    constructor Create(AOwner: TComponent; AChapter: string; ATitle: string);
+    constructor Create(AOwner: TComponent; AChapter:
+      string; ATitle: string); reintroduce;
   end;
 
 implementation
