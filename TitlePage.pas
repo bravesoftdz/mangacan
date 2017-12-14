@@ -65,6 +65,8 @@ implementation
 {$R *.fmx}
 {$R *.NmXhdpiPh.fmx ANDROID}
 {$R *.LgXhdpiPh.fmx ANDROID}
+{$R *.XLgXhdpiTb.fmx ANDROID}
+{$R *.LgXhdpiTb.fmx ANDROID}
 
 uses
   SinglePage, HtmlParser, System.IOUtils, System.Net.HttpClient, Commons;
