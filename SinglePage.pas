@@ -11,21 +11,17 @@ uses
 type
   TFrmSingle = class(TForm)
     ToolBar1: TToolBar;
-    BtnRefresh: TButton;
     LblJudul: TLabel;
     Browser: TWebBrowser;
-    EdChapter: TEdit;
     Client: TNetHTTPClient;
     Req: TNetHTTPRequest;
-    procedure BtnRefreshClick(Sender: TObject);
+    BtnBack: TButton;
   private
     FChapter: string;
     FTitle: string;
     function ParseImageList(AChapter: string): string;
   public
-  published
-    property Chapter: string read FChapter write FChapter;
-    property Title: string read FTitle write FTitle;
+    procedure Refresh(AChapter: string; ATitle: string);
   end;
 
 var
@@ -37,6 +33,9 @@ implementation
 {$R *.LgXhdpiPh.fmx ANDROID}
 {$R *.NmXhdpiPh.fmx ANDROID}
 
+uses
+  Commons;
+
 const
   sSource = 'http://www.mangacanblog.com/baca-komik-one_piece-' +
     '%s-%d-bahasa-indonesia-one_piece-%s-terbaru.html';
@@ -46,20 +45,20 @@ const
     '</head><body>%s</body></html>';
   sImage = '<img src="%s" id="responsive-image">';
 
-procedure TFrmSingle.BtnRefreshClick(Sender: TObject);
+procedure TFrmSingle.Refresh(AChapter, ATitle: string);
 var
   LFileHtml : string;
 begin
-  Chapter := EdChapter.Text;
-  Title := '';
-  LblJudul.Text := Title;
-  if (Chapter = EmptyStr) then
+  FChapter := AChapter;
+  FTitle := ATitle;
+  LblJudul.Text := Format('%s : %s', [FChapter, FTitle]);
+  if (FChapter = EmptyStr) then
     Exit;
 
-  LFileHtml := ParseImageList(Chapter);
+  LFileHtml := ParseImageList(FChapter);
   if (LFileHtml.IsEmpty) then
   begin
-    ShowMessage(Format('Komik One Piece Chapter %s Tidak ditemukan', [Chapter]));
+    ShowMessage(Format('Komik One Piece Chapter %s Tidak ditemukan', [FChapter]));
     Exit;
   end;
   Browser.Navigate('file://' + LFileHtml);
@@ -68,7 +67,7 @@ end;
 function TFrmSingle.ParseImageList(AChapter: string): string;
 var
   I: Integer;
-  LUrl, LDirectory: string;
+  LUrl: string;
   LHtml : WideString;
   LNodes: IHtmlElement;
   LlistNodes: IHtmlElementList;
@@ -79,14 +78,7 @@ var
   LIndex: string;
 begin
   Result := EmptyStr;
-  LDirectory := Format('%s/OnePiece',[TPath.GetCachePath]);
-
-  if not (TDirectory.Exists(LDirectory)) then
-  begin
-    TDirectory.CreateDirectory(LDirectory);
-  end;
-
-  LFile:= TPath.Combine(LDirectory, Format('%s.html', [AChapter]));
+  LFile:= TPath.Combine(CachePath, Format('%s.html', [AChapter]));
 
   if TFile.Exists(LFile) then
   begin
@@ -94,7 +86,7 @@ begin
     Exit;
   end;
 
-  LUrl := Format(sSource, [Chapter, StrToInt(Chapter) + 1, Chapter]);
+  LUrl := Format(sSource, [FChapter, StrToInt(AChapter) + 1, AChapter]);
 
   Req.URL := LUrl;
   LHtml := Req.Execute().ContentAsString();

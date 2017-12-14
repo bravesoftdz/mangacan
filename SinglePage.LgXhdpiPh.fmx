@@ -5,11 +5,10 @@ inherited FrmSingle_LgXhdpiPh: TFrmSingle_LgXhdpiPh
   inherited ToolBar1: TToolBar
     Size.Width = 450.000000000000000000
     inherited LblJudul: TLabel
-      Size.Width = 362.000000000000000000
+      Size.Width = 402.000000000000000000
     end
-    inherited EdChapter: TEdit
-      Position.Y = 8.000000000000000000
-      Size.Height = 32.000000000000000000
+    inherited BtnBack: TButton
+      StyledSettings = [Size, Style, FontColor]
     end
   end
   inherited Browser: TWebBrowser

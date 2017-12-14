@@ -13,32 +13,22 @@ object FrmSingle: TFrmSingle
     Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    object BtnRefresh: TButton
-      Align = Left
-      Size.Width = 48.000000000000000000
-      Size.Height = 48.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'refreshtoolbutton'
-      TabOrder = 1
-      OnClick = BtnRefreshClick
-    end
     object LblJudul: TLabel
       Align = Client
-      Size.Width = 215.000000000000000000
+      Size.Width = 255.000000000000000000
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       Text = 'Judul Chapter'
-      TabOrder = 2
+      TabOrder = 1
     end
-    object EdChapter: TEdit
-      Touch.InteractiveGestures = [LongTap, DoubleTap]
-      Align = Left
-      TabOrder = 3
-      Text = '888'
-      Position.X = 48.000000000000000000
-      Size.Width = 40.000000000000000000
+    object BtnBack: TButton
+      Align = MostLeft
+      ModalResult = 8
+      Size.Width = 48.000000000000000000
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
+      StyleLookup = 'priortoolbutton'
+      TabOrder = 2
     end
   end
   object Browser: TWebBrowser
