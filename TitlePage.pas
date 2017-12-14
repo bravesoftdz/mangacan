@@ -11,7 +11,7 @@ uses
 type
   TLoadThread = class(TThread)
   private
-    FHtml: WideString;
+    FHtml: string;
     FHtmlFile: TFileName;
     FTitles: TStrings;
     FLIstView: TListView;
@@ -60,11 +60,6 @@ uses
 const
   sUrl = 'http://www.mangacanblog.com/baca-komik-one_piece-bahasa-indonesia-online-terbaru.html';
 
-procedure TFrmTitle.BtnRefreshClick(Sender: TObject);
-begin
-  Refresh;
-end;
-
 procedure TFrmTitle.FormCreate(Sender: TObject);
 begin
   if not (TDirectory.Exists(CachePath)) then
@@ -78,11 +73,9 @@ begin
   Refresh;
 end;
 
-procedure TFrmTitle.LvTitleItemClick(const Sender: TObject;
-  const AItem: TListViewItem);
+procedure TFrmTitle.BtnRefreshClick(Sender: TObject);
 begin
-  FrmSingle.Refresh(AItem.Text, AITem.Detail);
-  FrmSingle.ShowModal;
+  Refresh;
 end;
 
 procedure TFrmTitle.LvTitlePullRefresh(Sender: TObject);
@@ -90,11 +83,19 @@ begin
   Refresh;
 end;
 
+procedure TFrmTitle.LvTitleItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+var
+  LFrmSingle : TFrmSingle;
+begin
+  LFrmSingle := TFrmSingle.Create(Self, AItem.Text, AItem.Detail);
+  LFrmSingle.Show;
+end;
+
 procedure TFrmTitle.Refresh;
 var
   FLoadThread : TLoadThread;
 begin
-  Indicator.Visible := True;
   FLoadThread := TLoadThread.Create(LvTitle, Indicator);
   FLoadThread.Start;
 end;
