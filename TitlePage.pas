@@ -28,13 +28,15 @@ type
     FTitles: TStrings;
     FLIstView: TListView;
     FIndicator: TAniIndicator;
+    FOffline: Boolean;
     procedure GetHtml;
     procedure ParseTitleList;
     procedure TitlesChange;
   protected
     procedure Execute; override;
   public
-    constructor Create(AListView: TListView; AIndicator: TAniIndicator);
+    constructor Create(AListView: TListView; AIndicator: TAniIndicator;
+      AOffline: Boolean = True);
     destructor Destroy; override;
   end;
 
@@ -44,14 +46,13 @@ type
     BtnRefresh: TButton;
     Label1: TLabel;
     Indicator: TAniIndicator;
-    procedure LvTitlePullRefresh(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure LvTitleItemClick(const Sender: TObject;
       const AItem: TListViewItem);
     procedure BtnRefreshClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
-    procedure Refresh;
+    procedure Refresh(AOffline: Boolean = True);
     { Private declarations }
   public
     { Public declarations }
@@ -89,12 +90,7 @@ end;
 
 procedure TFrmTitle.BtnRefreshClick(Sender: TObject);
 begin
-  Refresh;
-end;
-
-procedure TFrmTitle.LvTitlePullRefresh(Sender: TObject);
-begin
-  Refresh;
+  Refresh(False);
 end;
 
 procedure TFrmTitle.LvTitleItemClick(const Sender: TObject;
@@ -106,24 +102,26 @@ begin
   LFrmSingle.Show;
 end;
 
-procedure TFrmTitle.Refresh;
+procedure TFrmTitle.Refresh(AOffline: Boolean);
 var
   FLoadThread : TLoadThread;
 begin
-  FLoadThread := TLoadThread.Create(LvTitle, Indicator);
+  FLoadThread := TLoadThread.Create(LvTitle, Indicator, AOffline);
   FLoadThread.Start;
 end;
 
 { TLoadThread }
 
-constructor TLoadThread.Create(AListView: TListView; AIndicator: TAniIndicator);
+constructor TLoadThread.Create(AListView: TListView; AIndicator: TAniIndicator;
+  AOffline: Boolean);
 begin
   inherited Create(True);
   FreeOnTerminate := True;
+  FOffline := AOffline;
   FTitles := TStringList.Create;
   FIndicator := AIndicator;
   FLIstView := ALIstView;
-  FHtmlFile := TPath.Combine(CachePath, 'index.html');
+  FHtmlFile := TPath.Combine(CachePath, 'list.html');
 end;
 
 destructor TLoadThread.Destroy;
@@ -137,15 +135,18 @@ var
   LClient : THTTPClient;
   LResponse : IHTTPResponse;
 begin
+  if (TFile.Exists(FHtmlFile)) then
+    FTitles.LoadFromFile(FHtmlFile);
+
+  if (FOffline) then
+    Exit;
+
   LClient := THTTPClient.Create;
   try
     try
       LResponse := LClient.Get(sUrl);
       FHtml := LResponse.ContentAsString;
-      TFile.WriteAllText(FHtmlFile, FHtml);
-    except on E: Exception do
-      if TFile.Exists(FHtmlFile) then
-        FHtml := TFile.ReadAllText(FHtmlFile);
+    except
     end;
   finally
     LClient.Free;
@@ -155,12 +156,16 @@ end;
 procedure TLoadThread.TitlesChange;
 var
   I: Integer;
-  LItem: TListViewItem;
+  LItem, LOldItem: TListViewItem;
 begin
-  FLIstView.Items.Clear;
+//  FLIstView.Items.Clear;
   for I := 0 to Pred(FTitles.Count) do
   begin
-    LItem := FLIstView.Items.Add;
+    LOldItem := FLIstView.Items[I];
+    if (LOldItem <> nil) then
+      if LOldItem.Text = FTitles.KeyNames[I] then
+        Break;
+    LItem := FLIstView.Items.AddItem(I);
     LItem.Text := FTitles.KeyNames[I];
     LItem.Detail := FTitles.ValueFromIndex[I];
   end;
@@ -174,6 +179,9 @@ var
   LElement: IHtmlElement;
   LLengkap, LChapter, LJudul : string;
 begin
+  if (FOffline) then
+    Exit;
+
   LNodes := ParserHTML(FHtml);
   LlistNodes := LNodes.SimpleCSSSelector('a[class="chaptersrec"]');
   if (LListNodes.Count = 0) then
@@ -185,8 +193,11 @@ begin
     LLengkap := LElement.InnerText;
     LChapter := Copy(LLengkap, 11, LLengkap.IndexOf(':') - 11);
     LJudul := Copy(LLengkap, LLengkap.IndexOf(':') + 3, LLengkap.Length);
-    FTitles.AddPair(LChapter, LJudul);
+    if (FTitles.IndexOfName(LChapter) <> -1) then
+      Break;
+    FTitles.Insert(I ,LChapter + FTitles.NameValueSeparator + LJudul);
   end;
+  FTitles.SaveToFile(FHtmlFile);
 end;
 
 procedure TLoadThread.Execute;
