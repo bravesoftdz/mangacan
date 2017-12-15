@@ -22,9 +22,7 @@ object FrmTitle: TFrmTitle
     TabOrder = 0
     ItemAppearanceObjects.ItemObjects.Image.Visible = False
     OnItemClick = LvTitleItemClick
-    OnPullRefresh = LvTitlePullRefresh
     SearchVisible = True
-    PullToRefresh = True
   end
   object ToolBar1: TToolBar
     Align = MostTop
