@@ -29,6 +29,7 @@ type
     FLIstView: TListView;
     FIndicator: TAniIndicator;
     FOffline: Boolean;
+    FAllChapter: Boolean;
     procedure GetJson;
     procedure ParseTitleList;
     procedure TitlesChange;
@@ -36,7 +37,7 @@ type
     procedure Execute; override;
   public
     constructor Create(AListView: TListView; AIndicator: TAniIndicator;
-      AOffline: Boolean = True);
+      AOffline: Boolean; AAllChapter: Boolean);
     destructor Destroy; override;
   end;
 
@@ -56,7 +57,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure SwShowSwitch(Sender: TObject);
   private
-    procedure Refresh(AOffline: Boolean = True);
+    procedure Refresh(AOffline: Boolean; AAllChapter: Boolean);
     { Private declarations }
   public
     { Public declarations }
@@ -94,12 +95,12 @@ end;
 
 procedure TFrmTitle.FormShow(Sender: TObject);
 begin
-  Refresh;
+  Refresh(True, SwShow.IsChecked);
 end;
 
 procedure TFrmTitle.BtnRefreshClick(Sender: TObject);
 begin
-  Refresh(False);
+  Refresh(False, SwShow.IsChecked);
 end;
 
 procedure TFrmTitle.LvTitleItemClick(const Sender: TObject;
@@ -111,11 +112,11 @@ begin
   LFrmSingle.Show;
 end;
 
-procedure TFrmTitle.Refresh(AOffline: Boolean);
+procedure TFrmTitle.Refresh(AOffline: Boolean; AAllChapter: Boolean);
 var
   FLoadThread : TLoadThread;
 begin
-  FLoadThread := TLoadThread.Create(LvTitle, Indicator, AOffline);
+  FLoadThread := TLoadThread.Create(LvTitle, Indicator, AOffline, AAllChapter);
   FLoadThread.Start;
 end;
 
@@ -128,12 +129,13 @@ begin
   begin
     LblShow.Text := sShowOnly5Chapter;
   end;
+  Refresh(False, SwShow.IsChecked);
 end;
 
 { TLoadThread }
 
 constructor TLoadThread.Create(AListView: TListView; AIndicator: TAniIndicator;
-  AOffline: Boolean);
+  AOffline: Boolean; AAllChapter: Boolean);
 begin
   inherited Create(True);
   FreeOnTerminate := True;
@@ -141,7 +143,10 @@ begin
   FTitles := TStringList.Create;
   FIndicator := AIndicator;
   FLIstView := ALIstView;
-  FListFile := TPath.Combine(CachePath, 'list.html');
+  FAllChapter := AAllChapter;
+  if FAllChapter then
+    FListFile := TPath.Combine(CachePath, 'all.json') else
+    FListFile := TPath.Combine(CachePath, 'last5.json');
 end;
 
 destructor TLoadThread.Destroy;
@@ -154,11 +159,16 @@ procedure TLoadThread.GetJson;
 var
   LClient : THTTPClient;
   LResponse : IHTTPResponse;
+  LUrs: string;
 begin
   LClient := THTTPClient.Create;
   try
     try
-      LResponse := LClient.Get(sUrlAll);
+      if FAllChapter then
+        LUrs := sUrlAll else
+        LUrs := sUrlLast5;
+
+      LResponse := LClient.Get(LUrs);
       FJson := LResponse.ContentAsString;
     except
     end;
@@ -172,6 +182,7 @@ var
   I: Integer;
   LItem: TListViewItem;
 begin
+  FLIstView.Items.Clear;
   for I := 0 to Pred(FTitles.Count) do
   begin
     LItem := FLIstView.Items.Add;
@@ -187,7 +198,11 @@ var
   LValues, LObject : TJSONValue;
 begin
   if (FJson.IsEmpty) then
+  begin
+    if (TFile.Exists(FListFile)) then
+      FTitles.LoadFromFile(FListFile);
     exit;
+  end;
 
   LValues := TJSONObject.ParseJSONValue(FJson);
 
