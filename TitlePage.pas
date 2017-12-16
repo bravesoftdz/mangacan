@@ -28,7 +28,6 @@ type
     FTitles: TStrings;
     FLIstView: TListView;
     FIndicator: TAniIndicator;
-    FOffline: Boolean;
     FAllChapter: Boolean;
     procedure GetJson;
     procedure ParseTitleList;
@@ -37,7 +36,7 @@ type
     procedure Execute; override;
   public
     constructor Create(AListView: TListView; AIndicator: TAniIndicator;
-      AOffline: Boolean; AAllChapter: Boolean);
+      AAllChapter: Boolean);
     destructor Destroy; override;
   end;
 
@@ -57,7 +56,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure SwShowSwitch(Sender: TObject);
   private
-    procedure Refresh(AOffline: Boolean; AAllChapter: Boolean);
+    procedure Refresh(AAllChapter: Boolean);
     { Private declarations }
   public
     { Public declarations }
@@ -95,12 +94,12 @@ end;
 
 procedure TFrmTitle.FormShow(Sender: TObject);
 begin
-  Refresh(True, SwShow.IsChecked);
+  Refresh(SwShow.IsChecked);
 end;
 
 procedure TFrmTitle.BtnRefreshClick(Sender: TObject);
 begin
-  Refresh(False, SwShow.IsChecked);
+  Refresh(SwShow.IsChecked);
 end;
 
 procedure TFrmTitle.LvTitleItemClick(const Sender: TObject;
@@ -112,11 +111,11 @@ begin
   LFrmSingle.Show;
 end;
 
-procedure TFrmTitle.Refresh(AOffline: Boolean; AAllChapter: Boolean);
+procedure TFrmTitle.Refresh(AAllChapter: Boolean);
 var
   FLoadThread : TLoadThread;
 begin
-  FLoadThread := TLoadThread.Create(LvTitle, Indicator, AOffline, AAllChapter);
+  FLoadThread := TLoadThread.Create(LvTitle, Indicator, AAllChapter);
   FLoadThread.Start;
 end;
 
@@ -129,17 +128,16 @@ begin
   begin
     LblShow.Text := sShowOnly5Chapter;
   end;
-  Refresh(False, SwShow.IsChecked);
+  Refresh(SwShow.IsChecked);
 end;
 
 { TLoadThread }
 
 constructor TLoadThread.Create(AListView: TListView; AIndicator: TAniIndicator;
-  AOffline: Boolean; AAllChapter: Boolean);
+  AAllChapter: Boolean);
 begin
   inherited Create(True);
   FreeOnTerminate := True;
-  FOffline := AOffline;
   FTitles := TStringList.Create;
   FIndicator := AIndicator;
   FLIstView := ALIstView;
@@ -219,17 +217,8 @@ end;
 procedure TLoadThread.Execute;
 begin
   FIndicator.Visible := True;
-
-  if (FOffline) then
-  begin
-    if (TFile.Exists(FListFile)) then
-      FTitles.LoadFromFile(FListFile);
-  end else
-  begin
-    GetJson;
-    ParseTitleList;
-  end;
-
+  GetJson;
+  ParseTitleList;
   Synchronize(TitlesChange);
   FIndicator.Visible := False;
 end;
