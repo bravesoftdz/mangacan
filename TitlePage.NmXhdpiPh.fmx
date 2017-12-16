@@ -4,7 +4,7 @@ inherited FrmTitle_NmXhdpiPh: TFrmTitle_NmXhdpiPh
   DesignerMasterStyle = 0
   inherited LvTitle: TListView
     Size.Width = 400.000000000000000000
-    Size.Height = 567.000000000000000000
+    Size.Height = 523.000000000000000000
   end
   inherited ToolBar1: TToolBar
     Size.Width = 400.000000000000000000
@@ -14,6 +14,22 @@ inherited FrmTitle_NmXhdpiPh: TFrmTitle_NmXhdpiPh
     inherited Label1: TLabel
       Size.Width = 344.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+  end
+  inherited PnlBottom: TPanel
+    Margins.Left = 4.000000000000000000
+    Margins.Right = 4.000000000000000000
+    Margins.Bottom = 4.000000000000000000
+    Position.X = 4.000000000000000000
+    Position.Y = 571.000000000000000000
+    Size.Width = 392.000000000000000000
+    inherited SwShow: TSwitch
+      Position.Y = 7.000000000000000000
+      Size.Width = 44.000000000000000000
+      Size.Height = 26.000000000000000000
+    end
+    inherited LblShow: TLabel
+      Size.Width = 340.000000000000000000
     end
   end
 end

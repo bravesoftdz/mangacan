@@ -46,11 +46,15 @@ type
     BtnRefresh: TButton;
     Label1: TLabel;
     Indicator: TAniIndicator;
+    PnlBottom: TPanel;
+    SwShow: TSwitch;
+    LblShow: TLabel;
     procedure FormShow(Sender: TObject);
     procedure LvTitleItemClick(const Sender: TObject;
       const AItem: TListViewItem);
     procedure BtnRefreshClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure SwShowSwitch(Sender: TObject);
   private
     procedure Refresh(AOffline: Boolean = True);
     { Private declarations }
@@ -75,6 +79,10 @@ uses
 const
   sUrlAll = 'https://www.cbsanjaya.com/onepiece/all.json';
   sUrlLast5 = 'https://www.cbsanjaya.com/onepiece/last5.json';
+
+resourcestring
+  sShowAllChapter = 'Menampilkan Seluruh Chapter';
+  sShowOnly5Chapter = 'Hanya Menampilkan Lima Chapter Terahir';
 
 procedure TFrmTitle.FormCreate(Sender: TObject);
 begin
@@ -109,6 +117,17 @@ var
 begin
   FLoadThread := TLoadThread.Create(LvTitle, Indicator, AOffline);
   FLoadThread.Start;
+end;
+
+procedure TFrmTitle.SwShowSwitch(Sender: TObject);
+begin
+  if TSwitch(Sender).IsChecked then
+  begin
+    LblShow.Text := sShowAllChapter;
+  end else
+  begin
+    LblShow.Text := sShowOnly5Chapter;
+  end;
 end;
 
 { TLoadThread }

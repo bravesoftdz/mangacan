@@ -17,7 +17,7 @@ object FrmTitle: TFrmTitle
     FooterAppearanceClassName = 'TListHeaderObjects'
     Align = Client
     Size.Width = 273.000000000000000000
-    Size.Height = 432.000000000000000000
+    Size.Height = 392.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     ItemAppearanceObjects.ItemObjects.Image.Visible = False
@@ -56,5 +56,37 @@ object FrmTitle: TFrmTitle
     Align = Center
     Enabled = True
     Visible = False
+  end
+  object PnlBottom: TPanel
+    Align = MostBottom
+    Position.Y = 440.000000000000000000
+    Size.Width = 273.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object SwShow: TSwitch
+      Align = MostLeft
+      IsChecked = False
+      Margins.Left = 4.000000000000000000
+      Margins.Top = 4.000000000000000000
+      Margins.Right = 4.000000000000000000
+      Margins.Bottom = 4.000000000000000000
+      Position.X = 4.000000000000000000
+      Position.Y = 4.000000000000000000
+      Size.Width = 62.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'switchstyle'
+      TabOrder = 0
+      OnSwitch = SwShowSwitch
+    end
+    object LblShow: TLabel
+      Align = Client
+      Size.Width = 203.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Hanya Menampilkan Lima Judul'
+      TabOrder = 1
+    end
   end
 end
