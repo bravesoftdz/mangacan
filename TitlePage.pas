@@ -23,13 +23,13 @@ uses
 type
   TLoadThread = class(TThread)
   private
-    FHtml: string;
-    FHtmlFile: TFileName;
+    FJson: string;
+    FListFile: TFileName;
     FTitles: TStrings;
     FLIstView: TListView;
     FIndicator: TAniIndicator;
     FOffline: Boolean;
-    procedure GetHtml;
+    procedure GetJson;
     procedure ParseTitleList;
     procedure TitlesChange;
   protected
@@ -70,10 +70,11 @@ implementation
 {$R *.LgXhdpiTb.fmx ANDROID}
 
 uses
-  SinglePage, HtmlParser, System.IOUtils, System.Net.HttpClient, Commons;
+  SinglePage, System.JSON, System.IOUtils, System.Net.HttpClient, Commons;
 
 const
-  sUrl = 'http://www.mangacanblog.com/baca-komik-one_piece-bahasa-indonesia-online-terbaru.html';
+  sUrlAll = 'https://www.cbsanjaya.com/onepiece/all.json';
+  sUrlLast5 = 'https://www.cbsanjaya.com/onepiece/last5.json';
 
 procedure TFrmTitle.FormCreate(Sender: TObject);
 begin
@@ -121,7 +122,7 @@ begin
   FTitles := TStringList.Create;
   FIndicator := AIndicator;
   FLIstView := ALIstView;
-  FHtmlFile := TPath.Combine(CachePath, 'list.html');
+  FListFile := TPath.Combine(CachePath, 'list.html');
 end;
 
 destructor TLoadThread.Destroy;
@@ -130,22 +131,16 @@ begin
   inherited;
 end;
 
-procedure TLoadThread.GetHtml;
+procedure TLoadThread.GetJson;
 var
   LClient : THTTPClient;
   LResponse : IHTTPResponse;
 begin
-  if (TFile.Exists(FHtmlFile)) then
-    FTitles.LoadFromFile(FHtmlFile);
-
-  if (FOffline) then
-    Exit;
-
   LClient := THTTPClient.Create;
   try
     try
-      LResponse := LClient.Get(sUrl);
-      FHtml := LResponse.ContentAsString;
+      LResponse := LClient.Get(sUrlAll);
+      FJson := LResponse.ContentAsString;
     except
     end;
   finally
@@ -156,16 +151,11 @@ end;
 procedure TLoadThread.TitlesChange;
 var
   I: Integer;
-  LItem, LOldItem: TListViewItem;
+  LItem: TListViewItem;
 begin
-//  FLIstView.Items.Clear;
   for I := 0 to Pred(FTitles.Count) do
   begin
-    LOldItem := FLIstView.Items[I];
-    if (LOldItem <> nil) then
-      if LOldItem.Text = FTitles.KeyNames[I] then
-        Break;
-    LItem := FLIstView.Items.AddItem(I);
+    LItem := FLIstView.Items.Add;
     LItem.Text := FTitles.KeyNames[I];
     LItem.Detail := FTitles.ValueFromIndex[I];
   end;
@@ -174,37 +164,38 @@ end;
 procedure TLoadThread.ParseTitleList;
 var
   I : integer;
-  LNodes: IHtmlElement;
-  LlistNodes: IHtmlElementList;
-  LElement: IHtmlElement;
-  LLengkap, LChapter, LJudul : string;
+  LChapter, LJudul : string;
+  LValues, LObject : TJSONValue;
 begin
-  if (FOffline) then
-    Exit;
-
-  LNodes := ParserHTML(FHtml);
-  LlistNodes := LNodes.SimpleCSSSelector('a[class="chaptersrec"]');
-  if (LListNodes.Count = 0) then
+  if (FJson.IsEmpty) then
     exit;
 
-  for I := 0 to LlistNodes.Count - 1 do
+  LValues := TJSONObject.ParseJSONValue(FJson);
+
+  FTitles.Clear;
+  for LObject in LValues as TJSONArray do
   begin
-    LElement := LlistNodes.Items[I];
-    LLengkap := LElement.InnerText;
-    LChapter := Copy(LLengkap, 11, LLengkap.IndexOf(':') - 11);
-    LJudul := Copy(LLengkap, LLengkap.IndexOf(':') + 3, LLengkap.Length);
-    if (FTitles.IndexOfName(LChapter) <> -1) then
-      Break;
-    FTitles.Insert(I ,LChapter + FTitles.NameValueSeparator + LJudul);
+    LChapter := LObject.GetValue<string>('chapter');
+    LJudul := LObject.GetValue<string>('title');
+    FTitles.AddPair(LChapter, LJudul);
   end;
-  FTitles.SaveToFile(FHtmlFile);
+  FTitles.SaveToFile(FListFile);
 end;
 
 procedure TLoadThread.Execute;
 begin
   FIndicator.Visible := True;
-  GetHtml;
-  ParseTitleList;
+
+  if (FOffline) then
+  begin
+    if (TFile.Exists(FListFile)) then
+      FTitles.LoadFromFile(FListFile);
+  end else
+  begin
+    GetJson;
+    ParseTitleList;
+  end;
+
   Synchronize(TitlesChange);
   FIndicator.Visible := False;
 end;
