@@ -82,8 +82,8 @@ const
   sUrlLast5 = 'https://www.cbsanjaya.com/onepiece/last5.json';
 
 resourcestring
-  sShowAllChapter = 'Menampilkan Seluruh Chapter';
-  sShowOnly5Chapter = 'Hanya Menampilkan Lima Chapter Terahir';
+  sShowAllChapter = 'Seluruh Chapter';
+  sShowOnly5Chapter = 'Lima Chapter Terahir';
 
 procedure TFrmTitle.FormCreate(Sender: TObject);
 begin

@@ -85,7 +85,7 @@ object FrmTitle: TFrmTitle
       Size.Width = 203.000000000000000000
       Size.Height = 40.000000000000000000
       Size.PlatformDefault = False
-      Text = 'Hanya Menampilkan Lima Judul'
+      Text = 'Lima Chapter Terahir'
       TabOrder = 1
     end
   end
